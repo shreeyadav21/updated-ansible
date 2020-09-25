@@ -1,0 +1,4 @@
+---
+# vars file for ./roles/devops
+#folder_path: /var/lib/jenkins/workspace/ansiblenew
+folder_path: /home/shreeyadav21_gmail_com

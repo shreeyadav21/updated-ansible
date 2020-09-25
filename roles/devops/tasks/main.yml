@@ -1,0 +1,31 @@
+# tasks file for ./roles/devops
+- name: create docker directory
+  file:
+    path: "{{folder_path}}/docker"
+    state: directory
+#- name: installing docker -py
+    #  pip:
+    # name: docker-py
+    #state: present
+- name: copy jar file
+  copy:
+    src: /home/shreeyadav21_gmail_com/Devopscapstone/devopscicdcapstoneproject/DevopsCapstoneProject.war
+    dest: "{{folder_path}}/docker"
+- name: copy Dockerfile
+  copy:
+    src: /home/shreeyadav21_gmail_com/Devopscapstone/devopscicdcapstoneproject/Dockerfile
+    dest: "{{folder_path}}/docker"
+
+- name: building docker image
+  docker_image:
+    name: smedevops
+    build:
+      path: "{{folder_path}}/docker/Dockerfile"
+    source: build
+- name: running docker container
+  docker_container:
+    name: smedevopsv1
+    image: smedevops
+    ports: 
+     - "11022:8080"
+    detach: yes
